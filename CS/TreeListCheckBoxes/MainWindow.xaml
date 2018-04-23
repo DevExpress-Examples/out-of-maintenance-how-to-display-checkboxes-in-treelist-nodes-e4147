@@ -1,0 +1,24 @@
+﻿<Window x:Class="TreeListCheckBoxes.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+        xmlns:local="clr-namespace:TreeListCheckBoxes"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.DataContext>
+        <local:ViewModel />
+    </Window.DataContext>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" HorizontalAlignment="Center">
+            <CheckBox Name="cbShowCheckBoxes" Content="Show CheckBoxes" IsChecked="True" />
+            <CheckBox Name="cbAllowRecursiveChecking" Content="Allow Recursive Node Checking" />
+        </StackPanel>
+        <dxg:TreeListControl AutoGenerateColumns="AddNew" ItemsSource="{Binding Persons}">
+            <dxg:TreeListControl.View>
+                <dxg:TreeListView Name="treeListView1" ShowTotalSummary="True" ChildNodesPath="Children" TreeDerivationMode="ChildNodesSelector"
+                                  ShowCheckboxes="{Binding IsChecked, ElementName=cbShowCheckBoxes}" CheckBoxFieldName="IsChecked"
+                                  AllowRecursiveNodeChecking="{Binding IsChecked, ElementName=cbAllowRecursiveChecking}" />
+            </dxg:TreeListControl.View>
+        </dxg:TreeListControl>
+    </DockPanel>
+</Window>
